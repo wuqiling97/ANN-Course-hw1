@@ -7,9 +7,9 @@ class EuclideanLoss(object):
         self.name = name
 
     def forward(self, input, target):
-        '''Your codes here'''
-        pass
+        output = (input - target) ** 2
+        output = 0.5 * np.mean(output, axis=1)
+        return output
 
     def backward(self, input, target):
-        '''Your codes here'''
-        pass
+        return input - target

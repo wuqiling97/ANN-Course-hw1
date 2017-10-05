@@ -67,7 +67,6 @@ class Linear(Layer):
         self.diff_b = np.zeros(out_num)
 
     def forward(self, input):
-        assert input.shape[1] == self.in_num
         # save input
         self._saved_tensor = input
         return np.dot(input, self.W) + self.b
@@ -85,7 +84,7 @@ class Linear(Layer):
         grad_input = []
         for single_grad in grad_output:
             single_grad = single_grad.reshape(single_grad.shape[0], 1)
-            grad_input.append(np.dot(self.W, single_grad))
+            grad_input.append(np.dot(self.W, single_grad).flatten())
         return np.array(grad_input)
 
     def update(self, config):

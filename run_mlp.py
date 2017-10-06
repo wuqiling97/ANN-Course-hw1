@@ -11,7 +11,10 @@ train_data, test_data, train_label, test_label = load_mnist_2d('data')
 # Your model defintion here
 # You should explore different model architecture
 model = Network()
-model.add(Linear('fc1', 784, 10, 0.01))
+model.add(Linear('fc1', 784, 128, 0.01))
+model.add(Relu('active1'))
+model.add(Linear('fc2', 128, 10, 0.01))
+
 
 loss = EuclideanLoss(name='loss')
 
@@ -24,7 +27,7 @@ loss = EuclideanLoss(name='loss')
 config = {
     'learning_rate': 0.01,
     'weight_decay': 0.0,
-    'momentum': 0.003,
+    'momentum': 0.9,
     'batch_size': 100,
     'max_epoch': 100,
     'disp_freq': 50,  # display info each disp_freq training

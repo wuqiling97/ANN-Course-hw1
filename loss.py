@@ -7,9 +7,11 @@ class EuclideanLoss(object):
         self.name = name
 
     def forward(self, input, target):
-        output = (input - target) ** 2
-        output = 0.5 * np.mean(output, axis=1)
-        return output
+        # input: batch_size * 10
+        output = 0.5 * (input - target) ** 2
+        batch_size = output.shape[0]
+        return output.sum() / batch_size
 
     def backward(self, input, target):
-        return input - target
+        # batch_size * 10, dE/dy_i
+        return (input - target) / len(target)

@@ -72,14 +72,12 @@ class Linear(Layer):
         return np.dot(input, self.W) + self.b
 
     def backward(self, grad_output):
-        self.grad_b = np.mean(grad_output, axis=0)
+        self.grad_b = np.sum(grad_output, axis=0)
         self.grad_W = 0
-        batch_size = grad_output.shape[0]
         input = self._saved_tensor
         for single_input, single_grad in zip(input, grad_output):
             single_input = single_input.reshape(single_input.shape[0], 1)
             self.grad_W += single_input * single_grad
-        self.grad_W /= batch_size
 
         grad_input = []
         for single_grad in grad_output:

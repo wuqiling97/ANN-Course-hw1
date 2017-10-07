@@ -73,17 +73,8 @@ class Linear(Layer):
 
     def backward(self, grad_output):
         self.grad_b = np.sum(grad_output, axis=0)
-        self.grad_W = 0
-        input = self._saved_tensor
-        for single_input, single_grad in zip(input, grad_output):
-            single_input = single_input.reshape(single_input.shape[0], 1)
-            self.grad_W += single_input * single_grad
-
-        grad_input = []
-        for single_grad in grad_output:
-            single_grad = single_grad.reshape(single_grad.shape[0], 1)
-            grad_input.append(np.dot(self.W, single_grad).flatten())
-        return np.array(grad_input)
+        self.grad_W = self._saved_tensor.transpose().dot(grad_output)
+        return grad_output.dot(self.W.transpose())
 
     def update(self, config):
         mm = config['momentum']

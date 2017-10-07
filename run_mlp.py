@@ -10,10 +10,11 @@ train_data, test_data, train_label, test_label = load_mnist_2d('data')
 
 # Your model defintion here
 # You should explore different model architecture
+layer1_out = 128
 model = Network()
-model.add(Linear('fc1', 784, 128, 0.01))
+model.add(Linear('fc1', 784, layer1_out, 0.01))
 model.add(Relu('active1'))
-model.add(Linear('fc2', 128, 10, 0.01))
+model.add(Linear('fc2', layer1_out, 10, 0.01))
 
 
 loss = EuclideanLoss(name='loss')

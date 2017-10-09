@@ -21,7 +21,7 @@ def plot_loss(x, title=''):
 
 def plot_2loss(xtrain, ytrain, xtest, ytest, title=''):
     plt.plot(xtrain, ytrain, '-', label='Training')
-    plt.plot(xtest, ytest, '-', label='Testing')
+    plt.plot(xtest, ytest, '.-', label='Testing')
     plt.xlabel('iterations over epoch')
     plt.ylabel('loss')
     plt.legend(loc='upper center', framealpha=0.5, ncol=3)

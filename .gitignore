@@ -3,6 +3,9 @@ data/
 test_image/
 train_image/
 .idea/
+*.txt
+result.py
+*.pdf
 
 # tensorflow saver file
 *.index

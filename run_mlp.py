@@ -13,7 +13,7 @@ train_data, test_data, train_label, test_label = load_mnist_2d('data')
 
 # Your model definition here
 # You should explore different model architecture
-layer1_out = 128
+layer1_out = 196
 model = Network()
 model.add(Linear('fc1', 784, layer1_out, 0.01))
 model.add(Relu('active1'))
@@ -33,9 +33,9 @@ config = {
     'weight_decay': 0.0,
     'momentum': 0.9,
     'batch_size': 100,
-    'max_epoch': 100,
+    'max_epoch': 50,
     'disp_freq': 600,  # display info each disp_freq training
-    'test_epoch': 1
+    'test_epoch': 5
 }
 
 train_loss = []
@@ -59,13 +59,22 @@ for epoch in range(config['max_epoch']+1):
         test_acc.append(test_res[1])
         test_iter.append(epoch)
 
-    if epoch % 10 == 0 and epoch != 0:
-        res = input('continue training?')
-        if res.lower() == 'n':
-            break
+    # if epoch % 50 == 0 and epoch != 0:
+    #     res = input('continue training?')
+    #     if res.lower() == 'n':
+    #         break
 
+max_iter = np.argmax(test_acc)
+print('max accuracy at iteration {}, value = {}'.format(test_iter[max_iter], test_acc[max_iter]))
 plot_loss(train_iter, train_loss, 'Training Loss')
 plot_loss(test_iter, test_loss)
 plot_acc(test_iter, test_acc)
-max_iter = np.argmax(test_acc)
-print('max accuracy at iteration {}, value = {}'.format(test_iter[max_iter], test_acc[max_iter]))
+
+fout = open('result.py', 'w')
+print('''train_loss = {}
+train_acc = {}
+train_iter = {}
+test_loss = {}
+test_acc = {}
+test_iter = {}
+'''.format(train_loss, train_acc, train_iter, test_loss, test_acc, test_iter), file=fout)

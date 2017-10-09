@@ -12,7 +12,7 @@ def __plot(x, y, xlabel, ylabel, title):
 
 def plot_loss(x, y, title=''):
     plt.plot(x, y, '-')
-    plt.xlabel('iteration over epoch')
+    plt.xlabel('iterations over epoch')
     plt.ylabel('loss')
     plt.title(title)
     plt.ylim(ymin=0)
@@ -21,7 +21,7 @@ def plot_loss(x, y, title=''):
 
 def plot_acc(x, y, title=''):
     plt.plot(x, y, '.-')
-    plt.xlabel('iteration over epoch')
+    plt.xlabel('iterations over epoch')
     plt.ylabel('accuracy')
     plt.title(title)
     plt.ylim(ymax=1)

@@ -33,7 +33,7 @@ config = {
     'weight_decay': 0.0,
     'momentum': 0.9,
     'batch_size': 100,
-    'max_epoch': 50,
+    'max_epoch': 100,
     'disp_freq': 600,  # display info each disp_freq training
     'test_epoch': 5
 }
@@ -66,9 +66,8 @@ for epoch in range(config['max_epoch']+1):
 
 max_iter = np.argmax(test_acc)
 print('max accuracy at iteration {}, value = {}'.format(test_iter[max_iter], test_acc[max_iter]))
-plot_loss(train_iter, train_loss, 'Training Loss')
-plot_loss(test_iter, test_loss)
-plot_acc(test_iter, test_acc)
+plot_2loss(train_iter, train_loss, test_iter, test_loss, 'Training and testing Loss')
+plot_acc(test_iter, test_acc, 'Testing accuracy')
 
 fout = open('result.py', 'w')
 print('''train_loss = {}

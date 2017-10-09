@@ -5,6 +5,7 @@ train_image/
 .idea/
 *.txt
 result.py
+replot.py
 *.pdf
 
 # tensorflow saver file
